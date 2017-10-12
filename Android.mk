@@ -132,6 +132,8 @@ LOCAL_SRC_FILES += \
     lib/fcntl.c
 endif
 
+LOCAL_CFLAGS := -Wall -Werror -Wno-sign-compare
+
 include $(BUILD_HOST_STATIC_LIBRARY)
 ###########################################
 
@@ -143,7 +145,11 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/$(BUILD_OS)-lib \
     $(LOCAL_PATH)/lib
 
-LOCAL_CFLAGS := -DPKGDATADIR=\"$(LOCAL_PATH)/data\"
+LOCAL_CFLAGS := -DPKGDATADIR=\"$(LOCAL_PATH)/data\" \
+    -Wall -Werror \
+    -Wno-sign-compare \
+    -Wno-sometimes-uninitialized \
+    -Wno-unused-parameter \
 
 LOCAL_STATIC_LIBRARIES := libbison
 
