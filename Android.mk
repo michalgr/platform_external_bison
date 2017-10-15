@@ -14,6 +14,13 @@
 
 LOCAL_PATH:= $(call my-dir)
 
+ifeq ($(HOST_OS),darwin)
+# No -Werror for darwin yet. Need to fix/suppress more warnings.
+BISON_WERROR :=
+else
+BISON_WERROR := -Werror
+endif
+
 ###########################################
 include $(CLEAR_VARS)
 
@@ -132,6 +139,8 @@ LOCAL_SRC_FILES += \
     lib/fcntl.c
 endif
 
+LOCAL_CFLAGS := $(BISON_WERROR) -Wall -Wno-sign-compare
+
 include $(BUILD_HOST_STATIC_LIBRARY)
 ###########################################
 
@@ -144,6 +153,13 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/lib
 
 LOCAL_CFLAGS := -DPKGDATADIR=\"$(LOCAL_PATH)/data\"
+
+LOCAL_CFLAGS := -DPKGDATADIR=\"$(LOCAL_PATH)/data\" \
+    -Wall \
+    $(BISON_WERROR) \
+    -Wno-sign-compare \
+    -Wno-sometimes-uninitialized \
+    -Wno-unused-parameter \
 
 LOCAL_STATIC_LIBRARIES := libbison
 
@@ -186,3 +202,5 @@ LOCAL_SRC_FILES := \
     src/uniqstr.c
 
 include $(BUILD_HOST_EXECUTABLE)
+
+BISON_WERROR :=
