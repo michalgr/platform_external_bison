@@ -15,8 +15,7 @@
 LOCAL_PATH:= $(call my-dir)
 
 ifeq ($(HOST_OS),darwin)
-# No -Werror for darwin yet. Need to fix/suppress more warnings.
-BISON_WERROR :=
+BISON_WERROR := -Wno-shift-count-overflow
 else
 BISON_WERROR := -Werror
 endif
