@@ -162,7 +162,7 @@ cc_binary_host {
     defaults: ["bison_defaults"],
 
     cflags: [
-        "-DPKGDATADIR=\"external/bison/data\"",
+        "-DPKGDATADIR=\"prebuilts/build-tools/common/bison\"",
 
         "-Wno-sometimes-uninitialized",
         "-Wno-unused-parameter",
