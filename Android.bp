@@ -1,0 +1,225 @@
+// Copyright 2006 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_defaults {
+    name: "bison_defaults",
+
+    cflags: [
+        "-Wall",
+        "-Wno-sign-compare",
+    ],
+
+    target: {
+        darwin: {
+            local_include_dirs: [
+                "darwin-lib",
+                "lib",
+            ],
+            cflags: ["-Wno-shift-count-overflow"],
+        },
+        linux: {
+            local_include_dirs: [
+                "linux-lib",
+                "lib",
+            ],
+            cflags: ["-Werror"],
+        },
+    },
+}
+
+cc_library_host_static {
+    name: "libbison",
+    defaults: ["bison_defaults"],
+
+    srcs: [
+        "lib/allocator.c",
+        "lib/areadlink.c",
+        "lib/argmatch.c",
+        "lib/asnprintf.c",
+        "lib/basename-lgpl.c",
+        "lib/basename.c",
+        "lib/binary-io.c",
+        "lib/bitrotate.c",
+        "lib/bitset.c",
+        "lib/bitset/array.c",
+        "lib/bitset/list.c",
+        "lib/bitset/stats.c",
+        "lib/bitset/table.c",
+        "lib/bitset/vector.c",
+        "lib/bitsetv.c",
+        "lib/c-ctype.c",
+        "lib/c-strcasecmp.c",
+        "lib/c-strncasecmp.c",
+        "lib/careadlinkat.c",
+        "lib/cloexec.c",
+        "lib/close-stream.c",
+        "lib/closeout.c",
+        "lib/concat-filename.c",
+        "lib/dirname-lgpl.c",
+        "lib/dirname.c",
+        "lib/dup-safer-flag.c",
+        "lib/dup-safer.c",
+        "lib/exitfail.c",
+        "lib/fatal-signal.c",
+        "lib/fd-safer-flag.c",
+        "lib/fd-safer.c",
+        "lib/fopen-safer.c",
+        "lib/get-errno.c",
+        "lib/gethrxtime.c",
+        "lib/getprogname.c",
+        "lib/gettime.c",
+        "lib/gl_array_list.c",
+        "lib/gl_list.c",
+        "lib/gl_xlist.c",
+        "lib/hash.c",
+        "lib/localcharset.c",
+        "lib/main.c",
+        "lib/math.c",
+        "lib/mbswidth.c",
+        "lib/obstack.c",
+        "lib/path-join.c",
+        "lib/pipe-safer.c",
+        "lib/pipe2-safer.c",
+        "lib/pipe2.c",
+        "lib/printf-args.c",
+        "lib/printf-parse.c",
+        "lib/progname.c",
+        "lib/quotearg.c",
+        "lib/sig-handler.c",
+        "lib/spawn-pipe.c",
+        "lib/stripslash.c",
+        "lib/timespec.c",
+        "lib/timevar.c",
+        "lib/unistd.c",
+        "lib/uniwidth/width.c",
+        "lib/vasnprintf.c",
+        "lib/wait-process.c",
+        "lib/wctype-h.c",
+        "lib/xalloc-die.c",
+        "lib/xconcat-filename.c",
+        "lib/xmalloc.c",
+        "lib/xmemdup0.c",
+        "lib/xreadlink.c",
+        "lib/xsize.c",
+        "lib/xstrndup.c",
+        "lib/xtime.c",
+        "lib/yyerror.c",
+    ],
+
+    target: {
+        darwin: {
+            srcs: [
+                "lib/canonicalize-lgpl.c",
+                "lib/error.c",
+                "lib/fpending.c",
+                "lib/fprintf.c",
+                "lib/fseterr.c",
+                "lib/getopt.c",
+                "lib/getopt1.c",
+                "lib/glthread/lock.c",
+                "lib/glthread/threadlib.c",
+                "lib/isnand.c",
+                "lib/isnanf.c",
+                "lib/isnanl.c",
+                "lib/lstat.c",
+                "lib/malloca.c",
+                "lib/obstack_printf.c",
+                "lib/open.c",
+                "lib/perror.c",
+                "lib/printf-frexp.c",
+                "lib/printf-frexpl.c",
+                "lib/printf.c",
+                "lib/readlink.c",
+                "lib/rename.c",
+                "lib/snprintf.c",
+                "lib/sprintf.c",
+                "lib/stat-time.c",
+                "lib/stat.c",
+                "lib/strerror-override.c",
+                "lib/strerror.c",
+                "lib/strerror_r.c",
+                "lib/strverscmp.c",
+                "lib/unlink.c",
+                "lib/vfprintf.c",
+                "lib/vsnprintf.c",
+                "lib/vsprintf.c",
+                "lib/wcwidth.c",
+            ],
+        },
+
+        linux: {
+            srcs: [
+                "lib/fcntl.c",
+                "lib/hard-locale.c",
+                "lib/mbrtowc.c",
+            ],
+        },
+    },
+}
+
+//##########################################
+
+cc_binary_host {
+    name: "bison",
+    defaults: ["bison_defaults"],
+
+    cflags: [
+        "-DPKGDATADIR=\"external/bison/data\"",
+
+        "-Wno-sometimes-uninitialized",
+        "-Wno-unused-parameter",
+    ],
+
+    static_libs: ["libbison"],
+
+    srcs: [
+        "src/AnnotationList.c",
+        "src/InadequacyList.c",
+        "src/LR0.c",
+        "src/Sbitset.c",
+        "src/assoc.c",
+        "src/closure.c",
+        "src/complain.c",
+        "src/conflicts.c",
+        "src/derives.c",
+        "src/files.c",
+        "src/fixits.c",
+        "src/getargs.c",
+        "src/gram.c",
+        "src/graphviz.c",
+        "src/ielr.c",
+        "src/lalr.c",
+        "src/location.c",
+        "src/main.c",
+        "src/muscle-tab.c",
+        "src/named-ref.c",
+        "src/nullable.c",
+        "src/output.c",
+        "src/parse-gram.c",
+        "src/print-xml.c",
+        "src/print.c",
+        "src/print_graph.c",
+        "src/reader.c",
+        "src/reduce.c",
+        "src/relation.c",
+        "src/scan-code-c.c",
+        "src/scan-gram-c.c",
+        "src/scan-skel-c.c",
+        "src/state.c",
+        "src/symlist.c",
+        "src/symtab.c",
+        "src/tables.c",
+        "src/uniqstr.c",
+    ],
+}
