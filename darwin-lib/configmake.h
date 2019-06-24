@@ -22,7 +22,8 @@
 #define LISPDIR "/usr/local/share/emacs/site-lisp"
 #define LOCALEDIR "/usr/local/share/locale"
 #define MANDIR "/usr/local/share/man"
-#define PKGDATADIR "/usr/local/share/bison"
+// PKGDATADIR is now passed in from the build system.
+// #define PKGDATADIR "/usr/local/share/bison"
 #define PKGINCLUDEDIR "/usr/local/include/bison"
 #define PKGLIBDIR "/usr/local/lib/bison"
 #define PKGLIBEXECDIR "/usr/local/libexec/bison"

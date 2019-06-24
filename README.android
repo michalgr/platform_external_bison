@@ -1,2 +1,4 @@
 Initial commit checking in sources of bison-3.4 was prepared with
-scripts/fetch_sources.sh.
+scripts/fetch_sources.sh. Headers and lists of sources were generated with
+scripts/prepare_build_for_platform.sh. To make bundled m4 macros accessible to
+bison3 PKGDATADIR was redefined to point to appropriate directory.
