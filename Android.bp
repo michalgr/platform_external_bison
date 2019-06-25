@@ -287,7 +287,7 @@ linux_srcs = [
 cc_binary_host {
     name: "bison3",
     cflags: [
-        "-DPKGDATADIR=\"external/bpftrace/bison/data\"",
+        "-DPKGDATADIR=\"external/bpftrace/bison3/data\"",
 
         "-Wall",
         "-Werror",
